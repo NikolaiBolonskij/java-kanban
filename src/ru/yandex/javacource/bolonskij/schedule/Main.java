@@ -4,7 +4,7 @@ import ru.yandex.javacource.bolonskij.schedule.task.Epic;
 import ru.yandex.javacource.bolonskij.schedule.task.Status;
 import ru.yandex.javacource.bolonskij.schedule.task.Subtask;
 import ru.yandex.javacource.bolonskij.schedule.task.Task;
-import ru.yandex.javacource.bolonskij.schedule.task.manager.TaskManager;
+import ru.yandex.javacource.bolonskij.schedule.manager.TaskManager;
 
 
 public class Main {
@@ -15,11 +15,11 @@ public class Main {
         System.out.println("Поехали!");
 
 
-        Task task1 = new Task("task1", "taskDescription1");
-        Task task2 = new Task("task2", "taskDescription2");
+        Task task1 = new Task("task1", "taskDescription1", Status.NEW);
+        Task task2 = new Task("task2", "taskDescription2", Status.NEW);
 
-        int idTask1 = taskManager.addTask(task1, Status.NEW);
-        int idTask2 = taskManager.addTask(task2, Status.NEW);
+        int idTask1 = taskManager.addTask(task1);
+        int idTask2 = taskManager.addTask(task2);
 
         Epic epic1 = new Epic("epic1", "epic1Description1");
         Epic epic2 = new Epic("epic2", "epic1Description2");
@@ -27,17 +27,17 @@ public class Main {
         int idEpic1 = taskManager.addEpic(epic1);
         int idEpic2 = taskManager.addEpic(epic2);
 
-        Subtask subtask1 = new Subtask("subtask1", "subtaskDescription1");
-        Subtask subtask2 = new Subtask("subtask2", "subtaskDescription2");
-        Subtask subtask3 = new Subtask("subtask3", "subtaskDescription3");
-        Subtask subtask4 = new Subtask("subtask4", "subtaskDescription4");
-        Subtask subtask5 = new Subtask("subtask5", "subtaskDescription5");
+        Subtask subtask1 = new Subtask("subtask1", "subtaskDescription1", idEpic1, Status.NEW);
+        Subtask subtask2 = new Subtask("subtask2", "subtaskDescription2", idEpic1, Status.NEW);
+        Subtask subtask3 = new Subtask("subtask3", "subtaskDescription3", idEpic2, Status.NEW);
+        Subtask subtask4 = new Subtask("subtask4", "subtaskDescription4", idEpic2, Status.NEW);
+        Subtask subtask5 = new Subtask("subtask5", "subtaskDescription5", idEpic2, Status.NEW);
 
-        int idSubtask1 = taskManager.addSubtask(idEpic1, subtask1, Status.NEW);
-        int idSubtask2 = taskManager.addSubtask(idEpic1, subtask2, Status.NEW);
-        int idSubtask3 = taskManager.addSubtask(idEpic2, subtask3, Status.NEW);
-        int idSubtask4 = taskManager.addSubtask(idEpic2, subtask4, Status.NEW);
-        int idSubtask5 = taskManager.addSubtask(idEpic2, subtask5, Status.NEW);
+        int idSubtask1 = taskManager.addSubtask(subtask1);
+        int idSubtask2 = taskManager.addSubtask(subtask2);
+        int idSubtask3 = taskManager.addSubtask(subtask3);
+        int idSubtask4 = taskManager.addSubtask(subtask4);
+        int idSubtask5 = taskManager.addSubtask(subtask5);
 
         System.out.println(taskManager.getTask(idTask2));
         System.out.println(taskManager.getEpic(idEpic1));
