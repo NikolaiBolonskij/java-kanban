@@ -1,13 +1,31 @@
+package ru.yandex.javacource.bolonskij.schedule.task;
+
 import java.util.Objects;
 
 public class Task {
-    private final String name;
-    private final String description;
+    private String name;
+    private String description;
     private int id;
     private Status status;
 
     public Task(String name, String description) {
         this.name = name;
+        this.description = description;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
         this.description = description;
     }
 
@@ -23,35 +41,23 @@ public class Task {
         return status;
     }
 
-    public void setStatus(String status) {
-        switch (status) {
-            case "NEW":
-            case null:
-                this.status = Status.NEW;
-                break;
-            case "IN_PROGRESS":
-                this.status = Status.IN_PROGRESS;
-                break;
-            case "DONE":
-                this.status = Status.DONE;
-                break;
-            default:
-                break;
-        }
+    public void setStatus(Status status) {
+        this.status = status;
     }
-
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Task task = (Task) o;
-        return Objects.equals(name, task.name) && Objects.equals(description, task.description) && status == task.status;
+        return id == task.id && Objects.equals(name, task.name) &&
+                Objects.equals(description, task.description) &&
+                status == task.status;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, description, status);
+        return Objects.hash(name, description, id, status);
     }
 
     @Override
