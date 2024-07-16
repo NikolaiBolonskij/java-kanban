@@ -14,7 +14,7 @@ public interface TaskManager {
 
     int addEpic(Epic epic);
 
-    Integer addSubtask(Subtask subtask);
+    Integer addSubtask(Subtask subtask, int epicId);
 
     Task getTask(int id);
 

@@ -1,21 +1,29 @@
 package ru.yandex.javacource.bolonskij.schedule.task;
 
+import java.security.Key;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Epic extends Task {
-    private ArrayList<Integer> subtasksId = new ArrayList<>();
+    private HashMap<Integer, Subtask> subtasksId = new HashMap<>();
 
     public Epic(String name, String description) {
         super(name, description);
     }
 
-    public void setSubtask(int id) {
-        removeSubtask(id);
-        subtasksId.add(id);
+    public void setSubtask(Subtask subtask) {
+        if (subtask.getId() != getId()) {
+        removeSubtask(subtask.getId());
+        subtasksId.put(subtask.getId(), subtask);
+        }
+    }
+
+    public ArrayList<Subtask> getSubtasks() {
+        return new ArrayList<>(subtasksId.values());
     }
 
     public ArrayList<Integer> getSubtasksId() {
-        return subtasksId;
+        return new ArrayList<>(subtasksId.keySet());
     }
 
     public void clearSubtasks() {
@@ -23,15 +31,15 @@ public class Epic extends Task {
     }
 
     public void removeSubtask(int id) {
-        for (int i = 0; i < subtasksId.size(); i++) {
-            if (subtasksId.get(i) == id) subtasksId.remove(i);
+        if (subtasksId.containsKey(id)) {
+            subtasksId.remove(id);
         }
     }
 
     @Override
     public String toString() {
         return "Epic{" +
-                "subtaskId=" + subtasksId +
+                "subtaskId=" + getSubtasksId() +
                 "} " + super.toString();
     }
 }

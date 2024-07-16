@@ -45,17 +45,17 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public Integer addSubtask(Subtask subtask) {
-        Epic epic = epics.get(subtask.getEpicId());
-        if (epic == null) {
-            return null;
-        }
+    public Integer addSubtask(Subtask subtask, int epicId) {
+
+        if (subtask.getId() == epicId) return null;
+
         int id = nextId();
         subtask.setId(id);
+        subtask.setEpicId(epicId);
         subtasks.put(id, subtask);
 
-        epic.setSubtask(id);
-        updateEpicStatus(epic);
+        epics.get(epicId).setSubtask(subtask);
+        updateEpicStatus(epics.get(epicId));
 
         return id;
     }
@@ -124,15 +124,15 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public void updateSubtask(Subtask updatedSubtask, Status status) {
-        Subtask savedSubtask = subtasks.get(updatedSubtask.getId());
+    public void updateSubtask(Subtask subtask, Status status) {
+        Subtask savedSubtask = subtasks.get(subtask.getId());
         if (savedSubtask == null) {
             return;
         }
-        int epicId = savedSubtask.getEpicId();
-        updatedSubtask.setStatus(status);
-        subtasks.putIfAbsent(id, updatedSubtask);
-        epics.get(epicId).setSubtask(updatedSubtask.getId());
+        int epicId = subtask.getEpicId();
+        subtask.setStatus(status);
+        subtasks.putIfAbsent(id, subtask);
+        epics.get(epicId).setSubtask(subtask);
         updateEpicStatus(epics.get(epicId));
     }
 
@@ -209,8 +209,7 @@ public class InMemoryTaskManager implements TaskManager {
         if (epic.getSubtasksId() == null) {
             status = Status.NEW;
         } else {
-            for (Integer subtaskId : epic.getSubtasksId()) {
-                Subtask subtask = subtasks.get(subtaskId);
+            for (Subtask subtask : epic.getSubtasks()) {
                 Status subStatus = subtask.getStatus();
                 if (subStatus == Status.DONE) {
                     checkDone++;

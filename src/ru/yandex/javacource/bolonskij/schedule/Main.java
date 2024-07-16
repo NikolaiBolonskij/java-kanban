@@ -28,17 +28,17 @@ public class Main {
         int idEpic1 = manager.addEpic(epic1);
         int idEpic2 = manager.addEpic(epic2);
 
-        Subtask subtask1 = new Subtask("subtask1", "subtaskDescription1", idEpic1, Status.NEW);
-        Subtask subtask2 = new Subtask("subtask2", "subtaskDescription2", idEpic1, Status.NEW);
-        Subtask subtask3 = new Subtask("subtask3", "subtaskDescription3", idEpic2, Status.NEW);
-        Subtask subtask4 = new Subtask("subtask4", "subtaskDescription4", idEpic2, Status.NEW);
-        Subtask subtask5 = new Subtask("subtask5", "subtaskDescription5", idEpic2, Status.NEW);
+        Subtask subtask1 = new Subtask("subtask1", "subtaskDescription1", Status.NEW);
+        Subtask subtask2 = new Subtask("subtask2", "subtaskDescription2", Status.NEW);
+        Subtask subtask3 = new Subtask("subtask3", "subtaskDescription3", Status.NEW);
+        Subtask subtask4 = new Subtask("subtask4", "subtaskDescription4", Status.NEW);
+        Subtask subtask5 = new Subtask("subtask5", "subtaskDescription5", Status.NEW);
 
-        int idSubtask1 = manager.addSubtask(subtask1);
-        int idSubtask2 = manager.addSubtask(subtask2);
-        int idSubtask3 = manager.addSubtask(subtask3);
-        int idSubtask4 = manager.addSubtask(subtask4);
-        int idSubtask5 = manager.addSubtask(subtask5);
+        int idSubtask1 = manager.addSubtask(subtask1, idEpic1);
+        int idSubtask2 = manager.addSubtask(subtask2, idEpic1);
+        int idSubtask3 = manager.addSubtask(subtask3, idEpic1);
+        int idSubtask4 = manager.addSubtask(subtask4, idEpic2);
+        int idSubtask5 = manager.addSubtask(subtask5, idEpic2);
 
         System.out.println(manager.getTask(idTask2));
         System.out.println(manager.getEpic(idEpic1));

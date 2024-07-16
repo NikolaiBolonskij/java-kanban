@@ -3,17 +3,17 @@ package ru.yandex.javacource.bolonskij.schedule.task;
 public class Subtask extends Task {
     private int epicId;
 
-    public Subtask(String name, String description, int epicId, Status status) {
+    public Subtask(String name, String description, Status status) {
         super(name, description, status);
-        this.epicId =  epicId;
     }
 
+    public void setEpicId(int id) {
+        if (id != getId()) {
+        epicId = id;
+        }
+    }
     public int getEpicId() {
         return epicId;
-    }
-
-    public void setEpicId(int epicHolder) {
-        this.epicId = epicHolder;
     }
 
     @Override
