@@ -8,6 +8,13 @@ public class Task {
     private int id;
     private Status status;
 
+    public Task(int id, String name, String description, Status status) {
+        this.name = name;
+        this.description = description;
+        this.id = id;
+        this.status = status;
+    }
+
     public Task(String name, String description, Status status) {
         this.name = name;
         this.description = description;
@@ -15,6 +22,12 @@ public class Task {
     }
 
     public Task(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
+
+    public Task(int id, String name, String description) {
+        this.id = id;
         this.name = name;
         this.description = description;
     }

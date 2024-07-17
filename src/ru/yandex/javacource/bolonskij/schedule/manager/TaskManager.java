@@ -1,20 +1,19 @@
 package ru.yandex.javacource.bolonskij.schedule.manager;
 
 import ru.yandex.javacource.bolonskij.schedule.task.Epic;
-import ru.yandex.javacource.bolonskij.schedule.task.Status;
 import ru.yandex.javacource.bolonskij.schedule.task.Subtask;
 import ru.yandex.javacource.bolonskij.schedule.task.Task;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public interface TaskManager {
-    int nextId();
 
     int addTask(Task task);
 
     int addEpic(Epic epic);
 
-    Integer addSubtask(Subtask subtask, int epicId);
+    Integer addSubtask(Subtask subtask);
 
     Task getTask(int id);
 
@@ -30,9 +29,9 @@ public interface TaskManager {
 
     ArrayList<Subtask> getSubtasksInEpic(int epicId);
 
-    void updateTask(Task updatedTask, Status status);
+    void updateTask(Task updatedTask);
 
-    void updateSubtask(Subtask updatedSubtask, Status status);
+    void updateSubtask(Subtask updatedSubtask);
 
     void updateEpic(Epic updatedEpic);
 
@@ -48,8 +47,6 @@ public interface TaskManager {
 
     void removeAllSubtasks();
 
-    void updateEpicStatus(Epic epic);
-
-    ArrayList<Task> getHistory();
+    List<Task> getHistoryManager();
 
 }

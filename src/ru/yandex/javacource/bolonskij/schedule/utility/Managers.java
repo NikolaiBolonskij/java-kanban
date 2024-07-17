@@ -1,17 +1,16 @@
 package ru.yandex.javacource.bolonskij.schedule.utility;
 
-import ru.yandex.javacource.bolonskij.schedule.history.inMemoryHistoryManager;
+import ru.yandex.javacource.bolonskij.schedule.history.InMemoryHistoryManager;
 import ru.yandex.javacource.bolonskij.schedule.manager.InMemoryTaskManager;
-import ru.yandex.javacource.bolonskij.schedule.manager.TaskManager;
 import ru.yandex.javacource.bolonskij.schedule.task.Task;
 
 public class Managers {
 
-    public TaskManager getDefault() {
+    public static InMemoryTaskManager getDefault() {
         return new InMemoryTaskManager();
     }
 
-    public inMemoryHistoryManager<Task> getDefaultHistory() {
-        return new inMemoryHistoryManager<>();
+    public static InMemoryHistoryManager<Task> getDefaultHistory() {
+        return new InMemoryHistoryManager<>();
     }
 }

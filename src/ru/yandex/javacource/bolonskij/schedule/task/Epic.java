@@ -10,6 +10,10 @@ public class Epic extends Task {
         super(name, description);
     }
 
+    public Epic(int id, String name, String description) {
+        super(id, name, description);
+    }
+
     public void setSubtask(Subtask subtask) {
         if (subtask.getId() != getId()) {
         removeSubtask(subtask.getId());
