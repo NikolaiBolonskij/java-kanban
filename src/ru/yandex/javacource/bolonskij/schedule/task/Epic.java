@@ -1,6 +1,5 @@
 package ru.yandex.javacource.bolonskij.schedule.task;
 
-import java.security.Key;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -31,9 +30,7 @@ public class Epic extends Task {
     }
 
     public void removeSubtask(int id) {
-        if (subtasksId.containsKey(id)) {
-            subtasksId.remove(id);
-        }
+        subtasksId.remove(id);
     }
 
     @Override

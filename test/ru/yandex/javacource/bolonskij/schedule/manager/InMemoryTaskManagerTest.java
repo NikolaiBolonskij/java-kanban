@@ -9,7 +9,6 @@ import ru.yandex.javacource.bolonskij.schedule.task.Task;
 import ru.yandex.javacource.bolonskij.schedule.utility.Managers;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 class InMemoryTaskManagerTest {
 

@@ -3,9 +3,7 @@ package ru.yandex.javacource.bolonskij.schedule.history;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import ru.yandex.javacource.bolonskij.schedule.manager.TaskManager;
-import ru.yandex.javacource.bolonskij.schedule.task.Epic;
 import ru.yandex.javacource.bolonskij.schedule.task.Status;
-import ru.yandex.javacource.bolonskij.schedule.task.Subtask;
 import ru.yandex.javacource.bolonskij.schedule.task.Task;
 import ru.yandex.javacource.bolonskij.schedule.utility.Managers;
 
