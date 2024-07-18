@@ -2,7 +2,7 @@ package ru.yandex.javacource.bolonskij.schedule.task;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import ru.yandex.javacource.bolonskij.schedule.manager.InMemoryTaskManager;
+import ru.yandex.javacource.bolonskij.schedule.manager.TaskManager;
 import ru.yandex.javacource.bolonskij.schedule.utility.Managers;
 
 class EpicTest {
@@ -10,7 +10,7 @@ class EpicTest {
     @Test
     void CanNotAddEpicToItself() {
 
-        InMemoryTaskManager manager = Managers.getDefault();
+        TaskManager manager = Managers.getDefault();
 
         Epic epic = new Epic("Epic" , "epic");
         final int epicId = manager.addEpic(epic);

@@ -9,8 +9,8 @@ class ManagersTest {
     @Test
     void addNewInitialisedTaskManager() {
 
-        TaskManager manager = new Managers().getDefault();
-        TaskManager taskManager = new Managers().getDefault();
+        TaskManager manager = Managers.getDefault();
+        TaskManager taskManager = Managers.getDefault();
 
         Assertions.assertNotEquals(manager, taskManager);
     }

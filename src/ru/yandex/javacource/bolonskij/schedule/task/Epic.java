@@ -1,10 +1,10 @@
 package ru.yandex.javacource.bolonskij.schedule.task;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.List;
 
 public class Epic extends Task {
-    private HashMap<Integer, Subtask> subtasksId = new HashMap<>();
+    private final List<Integer> subtasksId = new ArrayList<>();
 
     public Epic(String name, String description) {
         super(name, description);
@@ -17,16 +17,13 @@ public class Epic extends Task {
     public void setSubtask(Subtask subtask) {
         if (subtask.getId() != getId()) {
         removeSubtask(subtask.getId());
-        subtasksId.put(subtask.getId(), subtask);
+        subtasksId.add(subtask.getId());
         }
     }
 
-    public ArrayList<Subtask> getSubtasks() {
-        return new ArrayList<>(subtasksId.values());
-    }
-
-    public ArrayList<Integer> getSubtasksId() {
-        return new ArrayList<>(subtasksId.keySet());
+    public List<Integer> getSubtasksId() {
+        if (!subtasksId.isEmpty()) return subtasksId;
+        return null;
     }
 
     public void clearSubtasks() {
@@ -34,7 +31,8 @@ public class Epic extends Task {
     }
 
     public void removeSubtask(int id) {
-        subtasksId.remove(id);
+        Object i = id;
+        subtasksId.remove(i);
     }
 
     @Override

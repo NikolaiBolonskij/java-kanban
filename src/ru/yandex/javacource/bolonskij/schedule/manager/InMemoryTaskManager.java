@@ -1,6 +1,6 @@
 package ru.yandex.javacource.bolonskij.schedule.manager;
 
-import ru.yandex.javacource.bolonskij.schedule.history.InMemoryHistoryManager;
+import ru.yandex.javacource.bolonskij.schedule.history.HistoryManager;
 import ru.yandex.javacource.bolonskij.schedule.task.Epic;
 import ru.yandex.javacource.bolonskij.schedule.task.Status;
 import ru.yandex.javacource.bolonskij.schedule.task.Subtask;
@@ -17,7 +17,7 @@ public class InMemoryTaskManager implements TaskManager {
     private final Map<Integer, Task> tasks = new HashMap<>();
     private final Map<Integer, Epic> epics = new HashMap<>();
     private final Map<Integer, Subtask> subtasks = new HashMap<>();
-    private final InMemoryHistoryManager<Task> historyManager = Managers.getDefaultHistory();
+    private final HistoryManager<Task> historyManager = Managers.getDefaultHistory();
 
     private int id = 0;
 
@@ -94,17 +94,18 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public ArrayList<Subtask> getSubtasksInEpic(int epicId) {
-        ArrayList<Subtask> subtaskArrayList = new ArrayList<>();
+        ArrayList<Subtask> subtaskList = new ArrayList<>();
         Epic epic = epics.get(epicId);
             if (epic == null) {
                 return null;
             }
+            if (epic.getSubtasksId() == null) return null;
         for (Integer id : epic.getSubtasksId()) {
             if (subtasks.containsKey(id)) {
-                subtaskArrayList.add(subtasks.get(id));
+                subtaskList.add(subtasks.get(id));
             }
         }
-        return subtaskArrayList;
+        return subtaskList;
     }
 
                                                             //обновление
@@ -137,7 +138,7 @@ public class InMemoryTaskManager implements TaskManager {
         if (savedEpic == null) {
             return;
         }
-        for(Subtask subtask : savedEpic.getSubtasks()) {
+        for(Subtask subtask : getSubtasksInEpic(savedEpic.getId())) {
             epic.setSubtask(subtask);
         }
         epic.setStatus(savedEpic.getStatus());
@@ -172,7 +173,7 @@ public class InMemoryTaskManager implements TaskManager {
             return;
         }
         Epic epic = epics.get(subtask.getEpicId());
-        epic.removeSubtask(id);
+        epic.removeSubtask(subtask.getId());
         updateEpicStatus(epic);
     }
 
@@ -210,7 +211,7 @@ public class InMemoryTaskManager implements TaskManager {
         if (epic.getSubtasksId() == null) {
             status = Status.NEW;
         } else {
-            for (Subtask subtask : epic.getSubtasks()) {
+            for (Subtask subtask : getSubtasksInEpic(epic.getId())) {
                 Status subStatus = subtask.getStatus();
                 if (subStatus == Status.DONE) {
                     checkDone++;

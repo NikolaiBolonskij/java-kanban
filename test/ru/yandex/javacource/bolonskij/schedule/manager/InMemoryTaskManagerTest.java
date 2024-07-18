@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 class InMemoryTaskManagerTest {
 
-    protected InMemoryTaskManager manager = Managers.getDefault();
+    public TaskManager manager = Managers.getDefault();
 
     final Task task = new Task("Task" , "TaskDesk", Status.NEW);
     final int saved = manager.addTask(task);
@@ -42,7 +42,7 @@ class InMemoryTaskManagerTest {
 
         Assertions.assertEquals(task, actual);
     }
-    
+
     @Test
     void epicsWithEqualIdAreEqual() {
         final Epic actual = manager.getEpic(savedEpic);
@@ -61,7 +61,7 @@ class InMemoryTaskManagerTest {
     @Test
     void addNewTask() {
 
-        InMemoryTaskManager manager = Managers.getDefault();
+        TaskManager manager = Managers.getDefault();
         Task task = new Task("Test addNewTask", "Test addNewTask description", Status.NEW);
         final int taskId = manager.addTask(task);
         final Task savedTask = manager.getTask(taskId);
@@ -79,7 +79,7 @@ class InMemoryTaskManagerTest {
     @Test
     void addDifferentTasks() {
 
-        InMemoryTaskManager manager = Managers.getDefault();
+        TaskManager manager = Managers.getDefault();
         Epic epic1 = new Epic("TestEpic1", "TestEpic1");
         Epic epic2 = new Epic("TestEpic2", "TestEpic2");
         int epic1Id = manager.addEpic(epic1);
@@ -120,7 +120,7 @@ class InMemoryTaskManagerTest {
     @Test
     void taskStatusAndNameChangeTest() {
 
-        InMemoryTaskManager manager = Managers.getDefault();
+        TaskManager manager = Managers.getDefault();
         Task task1 = new Task("task1", "taskDescription1", Status.NEW);
         Task task2 = new Task("task2", "taskDescription2", Status.NEW);
 
@@ -211,8 +211,7 @@ class InMemoryTaskManagerTest {
 
         rmManager.removeAllSubtasks();
         Assertions.assertEquals(clearList, rmManager.getAllSubtasks(), "Подзадачи не удалены");
-        Assertions.assertEquals(clearList, rmManager.getEpic(savedEpic).getSubtasks(),
-                "Подзадачи не удалены из эпика");
+        Assertions.assertNull(rmManager.getSubtasksInEpic(savedEpic), "Подзадачи не удалены из эпика");
 
         rmManager.removeAllTasks();
         rmManager.removeAllEpics();

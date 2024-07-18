@@ -2,7 +2,7 @@ package ru.yandex.javacource.bolonskij.schedule.history;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import ru.yandex.javacource.bolonskij.schedule.manager.InMemoryTaskManager;
+import ru.yandex.javacource.bolonskij.schedule.manager.TaskManager;
 import ru.yandex.javacource.bolonskij.schedule.task.Status;
 import ru.yandex.javacource.bolonskij.schedule.task.Task;
 import ru.yandex.javacource.bolonskij.schedule.utility.Managers;
@@ -13,7 +13,7 @@ class InMemoryHistoryManagerTest {
 
     @Test
     void tasksCorrectSaveInHistory() {
-        InMemoryTaskManager manager = Managers.getDefault();
+        TaskManager manager = Managers.getDefault();
 
         Task task1 = new Task("Name", "Desc");
         int idTask1 = manager.addTask(task1);

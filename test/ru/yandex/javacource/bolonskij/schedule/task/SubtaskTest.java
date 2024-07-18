@@ -2,7 +2,7 @@ package ru.yandex.javacource.bolonskij.schedule.task;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import ru.yandex.javacource.bolonskij.schedule.manager.InMemoryTaskManager;
+import ru.yandex.javacource.bolonskij.schedule.manager.TaskManager;
 import ru.yandex.javacource.bolonskij.schedule.utility.Managers;
 
 class SubtaskTest {
@@ -10,7 +10,7 @@ class SubtaskTest {
     @Test
     void canNotAddSubtaskAsEpicToItself() {
 
-        InMemoryTaskManager manager = Managers.getDefault();
+        TaskManager manager = Managers.getDefault();
         Epic epic = new Epic("1", "1");
         int epicID = manager.addEpic(epic);
         Task subtask = new Subtask("Subtask", "subtask", epicID, Status.NEW);

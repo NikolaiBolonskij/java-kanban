@@ -1,6 +1,7 @@
 package ru.yandex.javacource.bolonskij.schedule;
 
 import ru.yandex.javacource.bolonskij.schedule.manager.InMemoryTaskManager;
+import ru.yandex.javacource.bolonskij.schedule.manager.TaskManager;
 import ru.yandex.javacource.bolonskij.schedule.task.Epic;
 import ru.yandex.javacource.bolonskij.schedule.task.Subtask;
 import ru.yandex.javacource.bolonskij.schedule.task.Task;
@@ -9,7 +10,7 @@ import ru.yandex.javacource.bolonskij.schedule.utility.Managers;
 
 public class Main {
 
-    static InMemoryTaskManager manager = Managers.getDefault();
+    static TaskManager manager = Managers.getDefault();
 
     public static void main(String[] args) {
 
